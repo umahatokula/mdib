@@ -1,0 +1,7 @@
+<label for="day_id" class=" col-form-label">Appointment Days <span class="text-danger">*</span></label>
+<select name="day_id" id="day_id" class="form-control b-box" data-request="onAppointmentTimes">
+    <option value="" id="appointmentDays">Select one</option>
+    {% for day in days %}
+    <option value="{{ day.id }}">{{ day.day_of_week }}</option>
+    {% endfor %}
+</select>

@@ -1,0 +1,13 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    paystack_sk_key:
+        label: Paystack Secret Key
+        span: left
+        commentAbove: Get a Secret Key from https://payment.com/developers
+    paystack_pk_key:
+        label: Paystack Public Key
+        span: right
+        commentAbove: Get a Public Key from https://payment.com/developers

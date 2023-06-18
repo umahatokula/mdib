@@ -1,0 +1,86 @@
+title = "Articles"
+url = "/articles"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[newsPosts]
+pageNumber = "{{ :page }}"
+postsPerPage = 10
+noPostsMessage = "No posts found"
+sortOrder = "published_at desc"
+postFeatured = 0
+postPage = "article"
+==
+==
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>Blog</span>
+      <h2>My Articles</h2>
+    </div>
+
+    <div class="row">
+      {% set posts = newsPosts.posts %}
+
+        {% for post in posts %}
+
+        <div class="col-md-6">
+          <a href="{{ postPage }}/{{ post.slug }}" class="blog-list b-box d-block">
+            <div class="blog-list--img">
+
+              {% if post.image %}
+              <img src="{{ post.image|media }}" alt="{{ post.title }}" class="img-fluid">
+              {% endif %}
+
+              <div class="blog-list--details d-flex justify-content-center align-items-center">
+                <div class="blog-list--details-in">
+                  <p class="blog-date text-white">{{ post.published_at|date('F jS Y') }}</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="blog-list--desc p-3">
+              <h3>{{ post.title }}</h3>
+              {% if post.introductory %}
+              <p>{{ post.introductory|raw }}</p>
+              {% elseif post.content %}
+              <p>{{ post.introductory|raw }}</p>
+              {% endif %}                
+            </div>
+
+          </a>	
+        </div>
+        
+        {% else %}
+        <span class="post-nodata">{{ noPostsMessage }}</span>
+        {% endfor %}
+
+      {{ posts.render|raw }}
+
+    </div>
+    <div class="container">
+      <nav class="mt-5 d-flex justify-content-center" aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>		    				
+  </div>
+</section>

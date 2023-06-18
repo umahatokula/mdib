@@ -1,0 +1,23 @@
+<div class="card b-box mb-4" style="border: solid 1px #3e0e10; padding: 20px;">
+<h4 class='text-center my-4'>Appointment Days and Times</h4>
+    <div class="card-body">
+        <div class="row">
+            {% for day in days %}
+                <div class="col-md-3">
+                    <h4 class="card-title">{{ day.day_of_week }}</h4>
+                    {% for time in day.times %}
+                        <p class="card-text">
+                        {{ time.start_time_of_day|date("g:ia") }} - {{ time.end_time_of_day|date("g:ia") }}
+                        </p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if questionnaire_type == 1 %}
+    {% partial "@maritalCounsellingQuestionnaire" %}
+{% else %}
+    {% partial "@preMaritalCounsellingQuestionnaire" %}
+{% endif %}

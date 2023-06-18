@@ -1,0 +1,21 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    day_of_week:
+        label: Day of week
+        span: left
+        type: dropdown
+        options:
+            Monday: Monday
+            Tuesday: Tuesday
+            Wednesday: Wednesday
+            Thursday: Thursday
+            Friday: Friday
+            Saturday: Saturday
+            Sunday: Sunday
+    type_id:
+        label: Type of Appintment
+        span: right
+        type: dropdown

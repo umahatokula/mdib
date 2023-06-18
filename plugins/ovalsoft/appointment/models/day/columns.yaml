@@ -1,0 +1,11 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    day_of_week:
+        label: Day of week
+    appointment_type:
+        label: Appointment Type
+        relation: appointment_type
+        select: name

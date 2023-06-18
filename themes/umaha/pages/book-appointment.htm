@@ -1,0 +1,38 @@
+title = "Book An Appointment"
+url = "/book-appointment"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[bookAppointment]
+==
+<?php
+function onStart () {
+    $loggedIn = Auth::check();
+
+    if(!$loggedIn) {
+        return redirect('login');    
+    }
+}
+?>
+==
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>SERVICES</span>
+      <h2>Book An Appointment</h2>
+    </div>
+  
+    <div class="b-box p-4">
+    
+    {% if user %}
+        {% component 'bookAppointment' %}
+    {% else %}
+        <p>Nobody is logged in</p>
+    {% endif %}
+
+  	</div>
+    
+  </div>
+</section>

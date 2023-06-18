@@ -1,0 +1,120 @@
+title = "Demonstration"
+url = "/"
+layout = "default"
+
+==
+use \Lovata\Shopaholic\Classes\Item\ProductItem;
+
+function onStart() {
+    $obProduct = ProductItem::make(1);
+    $this['obProduct']  = $obProduct->getObject();}
+
+==
+
+<!-- START: HOME -->		
+<section class="section-home " id="home">
+    <h1 class="glass">&nbsp</h1>
+</section>	
+<!-- END: HOME -->
+
+<!-- START: ABOUT -->
+<section class="section section-about" id="about">
+    <div class="container">
+        <div class="section-head">
+            <span>Get to know</span>
+            <h2>About Me</h2>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5">
+                <img class="about-img img-fluid wow-none fadeInUp" data-wow-none-duration="1s"
+                    src="{{ 'assets/images/bannner3.jpg' | theme }}" alt="Doofan Hiikyaa">
+            </div>
+            <div class="col-md-7">
+                <div class="about-desc wow-none fadeInUp" data-wow-none-duration="1s"
+                    data-wow-none-delay="500ms">
+                    <div class="about-desc-content">
+                        <h1 class="font-weight-light mb-5">Hi, I'm Doofan Hiikyaa</h1>
+                        <p class="font-weight-light my-3">I am beloved of the Father in Christ Jesus; the happy, virtuous wife of a faithful man, Orgem and we are blessed with two beautiful daughters Ken-ana and Verse.</p>
+                        <p class="font-weight-light my-3">I am a marriage counsellor/coach, writer and first time author, host of the Flawless Marriage Conference and the founder of *MARRIAGE DIPPED IN BLOOD* a ministry focused on love, marriage and family relationships from a covenant perspective.</p>
+                        <p class="font-weight-light my-3">My all-consuming obsession is to restore families and lead many to understand and enjoy a lifelong happy and fruitful marriage in the bond of covenant.</p>
+                        <p class="font-weight-light my-3">I am confident that every troubled marriage can be restored with fresh passion and every thriving marriage can be better, if we remain conscious of marriage as a blood covenant and allow God’s Word—The Bible, be our manual of operation.</p>
+                        <p class="font-weight-light my-3">Orgem and I are often referred to as "Apostles of Love" and currently serve as the Resident Pastors of Christ Family Centre, Abidjan, Côte d'Ivoire.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% if obProduct %}
+    <div class="container mt-5 pt-5">
+        <div class="section-head ">
+            <span>Shop</span>
+            <h2>New Product</h2>
+        </div>
+
+        <div class="section-skills-wrap">
+            <div class="row">
+                    <div class="col-md-6 mb-3" style="min-height: 450px;">
+                        {% if obProduct.preview_image is not empty %}
+                            
+                        <div id="carouselExampleIndicators" class="carousel product-detailed__carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                {% if obProduct.images is not empty %}
+                                    {% for i in obProduct.images.count() %}
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" class="{% if loop.first %} active {% endif %}"></li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                {% endif %}
+                            </ol>
+                            <div class="carousel-inner mb-3 mb-lg-0 product-detailed__carousel-inner">
+                                {% if obProduct.images is not empty %}
+                                    {% for obImage in obProduct.images %}
+                                        <div class="carousel-item product-detailed__carousel-item {% if loop.first %} active {% endif %} h-100">
+                                            <img class="d-block w-100 h-100 product-detailed__carousel-item-img" src="{{ obImage.path }}" alt="{{ obImage.description }}" title="{{ obImage.title }}" loading="lazy">
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="carousel-item product-detailed__carousel-item active h-100">
+                                        <img class="d-block w-100 h-100 product-detailed__carousel-item-img" src="{{ 'assets/images/no-image.png'|theme }}">
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {# @var obProduct \Lovata\Shopaholic\Classes\Item\ProductItem #}
+                        <a href="{{ obProduct.getPageUrl('product-page') }}">
+                            <div>
+                                <h3 itemprop="name">{{ obProduct.name }}</h3>
+                            </div>
+                        </a>
+                        <div clsas="mb-4">
+                            {% if obProduct.preview_text is not empty %}
+                                <div itemprop="description">
+                                    <p>{{ obProduct.preview_text }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                                    
+                        <a href="{{ 'product-page'|page({ slug: obProduct.slug }) }}" class="btn btn-secondary mt-5" type="button">Buy</a>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+</section>
+<!-- END: ABOUT -->

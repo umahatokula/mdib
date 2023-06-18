@@ -1,0 +1,12 @@
+list: $/ovalsoft/payment/models/payment/columns.yaml
+modelClass: Ovalsoft\Payment\Models\Payment
+title: Payments
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: false
+showCheckboxes: true
+recordsPerPage: 20
+recordUrl: ovalsoft/payment/payments/preview/:id
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

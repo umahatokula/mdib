@@ -1,0 +1,30 @@
+
+<form onsubmit="$(this).request('useraddress::onAdd', { redirect: '/checkout' }); return false;">
+    <input type="hidden" id="type" name="type" value="shipping">
+    <div>
+        <label for="address1">Address Line 1</label>
+        <input type="text" class="form-control b-box" id="address1" name="address1" value="">
+    </div>
+    <div>
+        <label for="address2">Address Line 2</label>
+        <input type="text" class="form-control b-box" id="address2" name="address2" value="">
+    </div>
+    <div>
+        <label for="street">Street</label>
+        <input type="text" class="form-control b-box" id="street" name="street" value="">
+    </div>
+    <div>
+        <label for="city">City</label>
+        <input type="text" class="form-control b-box" id="city" name="city" value="">
+    </div>
+    <div>
+        <label for="State">State</label>
+        <input type="text" class="form-control b-box" id="State" name="State" value="">
+    </div>
+    <div>
+        <label for="country">Country</label>
+        <input type="text" class="form-control b-box" id="country" name="country" value="">
+    </div>
+
+    <button class="btn btn-sm btn-secondary">Save Address</button>
+</form>

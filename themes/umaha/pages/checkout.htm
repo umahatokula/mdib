@@ -1,0 +1,98 @@
+title = "Checkout"
+url = "/checkout"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[MakeOrder]
+mode = "ajax"
+flash_on = 1
+redirect_on = 1
+redirect_page = "checkout-success"
+
+[ShippingTypeList]
+
+[PaymentMethodList]
+
+[Cart]
+==
+<?php
+function onStart () {
+    $loggedIn = Auth::check();
+
+    if(!$loggedIn) {
+        return redirect('login');    
+    }
+
+    $user = Auth::getUser();
+
+    $user_addresses = DB::table('lovata_orders_shopaholic_user_addresses')->where('type', 'shipping')->where('user_id', $user->id)->get();
+
+    $this['user'] = $user;
+    $this['user_addresses'] = $user_addresses;
+    // dd($user_addresses->toArray());
+    
+    $this->addJs('assets/js/orders/make-order.js');
+    $this->addJs('assets/toastr/toastr.js');
+    // $this->addJs('assets/js/add-cart/button-add-to-cart.js');
+}
+?>
+==
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>SHOP</span>
+      <h2>Checkout</h2>{% component 'Cart' %}
+    </div>
+
+    <div class="b-box p-4">
+    {% set obCartPositionList = Cart.get() %}
+    {% if obCartPositionList.isNotEmpty() %}
+        <h4 class="mt-5 mb-2" style="color: #a5090f;">Shipping Address</h4>
+
+        {% if user_addresses|length %}
+        
+            <table class="table text-light table-responsive-md table-sm">
+                {% for address in user_addresses %}
+                <tr>
+                    <td class="text-center" style="vertical-align: middle;">
+                        <input type="radio" id="shipping-address-{{ address.id }}" name="shipping_address_id" value="{{ address.id }}" id=shipping_address_id>
+                    </td>
+                    <td class="text-left" style="vertical-align: middle;">{{ address.address1 }} {{ address.address2 }} <br> {{ address.street }} <br> {{ address.city }} <br> {{ address.state }} <br> {{ address.country }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <h4 class="mt-5 mb-2" style="color: #a5090f;">Shipping Methods</h4>
+            {# Render shipping types #}
+            {% set obShippingTypeList = ShippingTypeList.make().sort().active() %}
+            {% if obShippingTypeList.isNotEmpty() %}
+            <table class="table text-light table-responsive-md table-sm">
+                {% for obShippingType in obShippingTypeList %}
+                <tr>
+                    <td>
+                        <input type="radio" id="shipping-type-{{ obShippingType.id }}" name="shipping_type_id" value="{{ obShippingType.id }}" id=shipping_type_id>
+                    </td>
+                    <td>
+                        {{ obShippingType.price_value }}
+                        <input type="hidden" id="shipping-price-{{ obShippingType.id }}" name="shipping_price" value="{{ obShippingType.price_value }}">
+                    </td>
+                    <td>{{ obShippingType.name }}</td>
+                    <td>{{ obShippingType.preview_text }}</td>
+                </tr>
+                {% endfor%}
+            </table>
+            {% endif %}
+
+            <button type="button" class="btn btn-lg btn-secondary checkOutButton">Check Out</button>
+
+        {% endif %}
+
+  	</div>
+    {% else %}
+        <div>Cart is empty</div>
+    {% endif %}
+    
+  </div>
+</section>

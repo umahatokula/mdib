@@ -1,0 +1,24 @@
+title = "Pay"
+url = "/pay/:code"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[Payment]
+code = "{{ :code }}"
+
+==
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>SERVICES</span>
+      <h2>Payment</h2>
+    </div>
+
+    <div class="b-box p-4">
+      	{% component 'Payment' %}
+  	</div>
+    
+  </div>
+</section>

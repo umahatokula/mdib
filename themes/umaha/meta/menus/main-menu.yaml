@@ -1,0 +1,63 @@
+name: 'Main menu'
+items:
+    -
+        title: Home
+        nesting: ''
+        type: cms-page
+        url: ''
+        code: ''
+        reference: home
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: home
+            isExternal: '0'
+    -
+        title: Articles
+        type: cms-page
+        code: ''
+        reference: articles
+        viewBag:
+            isHidden: '0'
+            cssClass: files
+            isExternal: '0'
+    -
+        title: Services
+        type: cms-page
+        code: ''
+        reference: services
+        viewBag:
+            isHidden: '0'
+            cssClass: service
+            isExternal: '0'
+    -
+        title: Appointments
+        type: cms-page
+        code: ''
+        reference: book-appointment
+        viewBag:
+            isHidden: '0'
+            cssClass: calendar
+            isExternal: '0'
+    -
+        title: Shop
+        nesting: '0'
+        type: shop-category
+        code: ''
+        reference: '1'
+        cmsPage: catalog
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: cart
+            isExternal: '0'
+    -
+        title: Contact
+        type: cms-page
+        code: ''
+        reference: contact
+        viewBag:
+            isHidden: '0'
+            cssClass: envelope
+            isExternal: '0'

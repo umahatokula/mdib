@@ -1,0 +1,65 @@
+title = "Article"
+url = "/article/:slug"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[newsPost]
+slug = "{{ :slug }}"
+==
+<section class="section section-light">
+  <div class="container">
+
+    {% set post = newsPost.post %}
+    <div class="section-head text-center mb-0">
+      {% if post.category %}
+      <span>
+        {{ post.category.name }}
+      </span>
+      {% endif %}
+      <h2>{{ post.title }}</h2>
+    </div>
+
+        
+    <div class="blogDetail-wrapper">
+      <div class="container">
+        <div class="blogDetail">
+              <div class="blogDetail--head text-center">
+
+                  <div class="blogDetail--head-details mb-5">
+                      <ul class="d-flex justify-content-center">
+                          <li>Published <span datetime="2019-01-20">{{ post.published_at|date('F jS Y') }}</span></li>
+                      </ul>
+                  </div>
+
+                  
+                  <div class="blog-thumbnail">
+                    {% if post.image %}<img src="{{ post.image|media }}" alt="{{ post.title }}">{% endif %}
+                  </div>
+                  
+                  
+              </div>
+
+              <div class="blogDetail--content">
+                  <p>
+                  {% if post.introductory %}<div class="post-introductory">{{ post.introductory|raw }}</div>{% endif %}
+                  {% if post.content %}<div class="post-content">{{ post.content|raw }}</div>{% endif %}
+                  </p>
+
+              </div>
+              <div class="blogDetail--footer">
+                  <div class="social-share my-4">
+                      <span>Share : </span>
+                      <a target="_blank" href="#" class="b-box p-2 text-muted"><i class="fab fa-facebook-f"></i> Facebook</a>
+                      <a target="_blank" href="#" class="b-box p-2 text-muted"><i class="fab fa-twitter"></i> Twitter</a>
+                      <a target="_blank" href="#" class="b-box p-2 text-muted"><i class="fab fa-google-plus-g"></i> Google+</a>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+    </div>
+
+  </div>
+</section>

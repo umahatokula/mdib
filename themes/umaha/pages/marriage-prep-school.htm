@@ -1,0 +1,93 @@
+title = "Marriage Prep School"
+url = "/marriage-prep-school"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use Ovalsoft\Appointment\Models\Day;
+
+function onEnd()
+{
+    $bookings = Day::with('times')->get();
+	$this->page->bookings = $bookings->groupBy('type_id');
+	// dd($this->page->bookings);
+}
+?>
+==
+{% set bookings = this.page.bookings %}
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>Services</span>
+      <h2>Marriage Prep School</h2>
+    </div>
+  
+  	<div class="b-box p-4">
+  	
+        <p>Marriage preparation is not only important but absolutely necessary to get you started your marriage covenant adventure on a good foundation.</p>
+        
+        <p>Research shows that couples who receive premarital Counselling have a 30% lower chance at divorce than couples who do not. (Scott Stanley, The Marriage Project.) </p>
+        
+        <p>That’s why Marriage Prep School is a great place to get you started.</p>
+        
+        <p>Marriage Prep School 
+        is a 4-week Premarital Counselling Program.</p>
+        
+        <p>You could choose to take the courses online or in person, depending on your location.</p>
+        
+       <p> What you’ll learn in 4 weeks</p>
+       <ul>
+           <li>Your identity </li>
+           <li>How it affects your choice of a life partner </li>
+           <li>The role of your faith and spirituality in choosing a life partner</li>
+           <li>How to know whether or not you’re ready for marriage </li>
+           <li>How to know "the One"</li>
+           <li>How to become Mr/Mrs Right</li>
+           <li>Communication skills</li>
+           <li>Conflict management /resolution</li>
+           <li>How to become financially intelligent </li>
+           <li>A ton of questions to ask a potential spouse </li>
+           <li>And more</li>
+       </ul>
+       
+       <p>A certificate of participation will be presented to every active participant at the end of the program.</p>
+    	<br>
+    	<table class="table text-white" style="color: #FFF">
+    		<thead>
+    			<tr>
+    				<td>Day of Week</td>
+    				<td>Times</td>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			{% for booking in bookings[2] %}
+    			<tr>
+    				<td>{{ booking.day_of_week }}</td>
+    				<td>{% for time in booking.times %} {{ time.start_time_of_day | date('H i a') }} - {{ time.end_time_of_day | date('H i a') }} <br> {% endfor %}</td>
+    			</tr>
+    			{% endfor %}
+    		</tbody>
+    	</table>
+  	</div>
+    
+  </div>
+</section>
+
+<!-- START: CTA -->
+<section class="section pt-0 section-freelance section-light text-center ">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-head wow-none fadeInUp" data-wow-none-duration="1.5s">
+					<h2>Let's work together!</h2>
+				</div>
+				<div class="mt-5 wow-none fadeInUp" data-wow-none-duration="1.5s" data-wow-none-delay=".2s">
+					<a href="{{ 'book-appointment' | page }}" class="btn ">Book An Appointment!</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END: CTA -->

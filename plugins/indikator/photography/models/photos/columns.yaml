@@ -1,0 +1,124 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+
+    id:
+        label: indikator.photography::lang.form.id
+        invisible: true
+
+    image:
+        label: indikator.photography::lang.form.image
+        sortable: false
+        clickable: false
+        invisible: true
+        type: partial
+        path: ~/plugins/indikator/photography/models/photos/_image.htm
+
+    name:
+        label: indikator.photography::lang.form.name
+        searchable: true
+
+    slug:
+        label: indikator.photography::lang.form.slug
+        searchable: true
+        invisible: true
+
+    category:
+        label: indikator.photography::lang.menu.categories
+        searchable: true
+        sortable: false
+        type: partial
+        path: ~/plugins/indikator/photography/models/photos/_category.htm
+
+    exif_date:
+        label: indikator.photography::lang.form.exif_date
+        searchable: true
+        invisible: true
+
+    exif_model:
+        label: indikator.photography::lang.form.exif_model
+        searchable: true
+        invisible: true
+
+    exif_aperture:
+        label: indikator.photography::lang.form.exif_aperture
+        searchable: true
+
+    exif_exposure:
+        label: indikator.photography::lang.form.exif_exposure
+        searchable: true
+        sortable: false
+        type: partial
+        path: ~/plugins/indikator/photography/models/photos/_exposure.htm
+
+    exif_focal:
+        label: indikator.photography::lang.form.exif_focal
+        searchable: true
+
+    exif_focal_ff:
+        label: indikator.photography::lang.form.exif_focal_ff
+        sortable: false
+        invisible: true
+        type: partial
+        path: ~/plugins/indikator/photography/models/photos/_focal_ff.htm
+
+    exif_iso:
+        label: indikator.photography::lang.form.exif_iso
+        searchable: true
+
+    exif_flash:
+        label: indikator.photography::lang.form.exif_flash
+        invisible: true
+        type: partial
+        path: ~/plugins/indikator/photography/models/photos/_flash.htm
+
+    exif_orientation:
+        label: indikator.photography::lang.form.exif_orientation
+        type: partial
+        path: ~/plugins/indikator/photography/models/photos/_orientation.htm
+
+    exif_ratio:
+        label: indikator.photography::lang.form.exif_ratio
+        searchable: true
+
+    exif_width:
+        label: indikator.photography::lang.form.exif_width
+        searchable: true
+        invisible: true
+
+    exif_height:
+        label: indikator.photography::lang.form.exif_height
+        searchable: true
+        invisible: true
+
+    filesize:
+        label: indikator.photography::lang.form.filesize
+        clickable: false
+        invisible: true
+        type: partial
+        path: ~/plugins/indikator/photography/models/photos/_filesize.htm
+
+    featured:
+        label: indikator.photography::lang.form.featured
+        sortable: false
+        invisible: true
+        type: photo_featured
+
+    status:
+        label: indikator.photography::lang.form.status
+        sortable: false
+        type: photo_status
+
+    created_at:
+        label: indikator.photography::lang.form.created
+        searchable: true
+        invisible: true
+        type: datetime
+
+    updated_at:
+        label: indikator.photography::lang.form.updated
+        searchable: true
+        invisible: true
+        type: datetime

@@ -1,0 +1,7 @@
+<label for="time_id" class=" col-form-label">Appointment Times <span class="text-danger">*</span></label>
+<select name="time_id" id="time_id" class="form-control b-box" data-request="onGetTotalAmount">
+    <option value="" id="appointmentDays">Select one</option>
+    {% for time in times %}
+    <option value="{{ day.id }}">{{ time.start_time_of_day }} - {{ time.end_time_of_day }}</option>
+    {% endfor %}
+</select>

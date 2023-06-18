@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Registration
+
+# Model Form Field configuration
+form: $/ovalsoft/registration/models/registration/fields.yaml
+
+# Model Class name
+modelClass: Ovalsoft\Registration\Models\Registration
+
+# Default redirect location
+defaultRedirect: ovalsoft/registration/registrations
+
+# Create page
+create:
+    title: Create Registration
+    redirect: ovalsoft/registration/registrations/update/:id
+    redirectClose: ovalsoft/registration/registrations
+
+# Update page
+update:
+    title: Edit Registration
+    redirect: ovalsoft/registration/registrations
+    redirectClose: ovalsoft/registration/registrations
+
+# Preview page
+preview:
+    title: Preview Registration

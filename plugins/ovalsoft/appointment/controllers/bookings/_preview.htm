@@ -1,0 +1,132 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('ovalsoft/appointment/bookings') ?>">Bookings</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+
+    <div class="form-preview">
+        <h3><?= $record->type->name ?></h3>
+        <?= $this->formRenderPreview() ?>
+    </div>
+
+    <div class="form-preview">
+
+        <?php if($record->type_id == 1) { ?> 
+        <table class="table table-bordered">
+            <tr>
+                <td>What do you hope to achieve from counselling?</td>
+                <td>
+                    <ul>
+                        <?php foreach ($record->marital_questionnaire->hope_to_achieve as $hope) { ?>
+                            <li> <?php echo $hope; ?> </li>
+                        <?php } ?>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><?= $record->marital_questionnaire->gender ?></td>
+            </tr>
+            <tr>
+                <td>Do you prefer to work with a male or female counsellor?</td>
+                <td><?= $record->marital_questionnaire->counsellor_type ?></td>
+            </tr>
+            <tr>
+                <td>Do you have issues with domestic violence?</td>
+                <td><?= $record->marital_questionnaire->violence_issues ?></td>
+            </tr>
+            <tr>
+                <td>How would you rate your current financial status per annum?</td>
+                <td><?= $record->marital_questionnaire->financial_status ?></td>
+            </tr>
+            <tr>
+                <td>How old are you?</td>
+                <td><?= $record->marital_questionnaire->age ?></td>
+            </tr>
+            <tr>
+                <td>How long have you been married?</td>
+                <td><?= $record->marital_questionnaire->marriage_duration ?></td>
+            </tr>
+            <tr>
+                <td>Do you have children?(How many?)</td>
+                <td><?= $record->marital_questionnaire->children ?></td>
+            </tr>
+            <tr>
+                <td>How did you hear about Marriage dipped in blood?</td>
+                <td>
+                    <ul>
+                        <?php foreach ($record->marital_questionnaire->hear_about_us as $aboutus) { ?>
+                            <li> <?php echo $aboutus; ?> </li>
+                        <?php } ?>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>What country are you in?</td>
+                <td><?= $record->marital_questionnaire->country ?></td>
+            </tr>
+        </table>
+        <?php } ?>
+
+        <?php if($record->type_id == 2 || $record->type_id == 3) { ?> 
+        <table class="table table-bordered">
+            <tr>
+                <td>City</td>
+                <td><?= $record->marital_questionnaire->city ?></td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td><?= $record->marital_questionnaire->country ?></td>
+            </tr>
+            <tr>
+                <td>Date of Birth?</td>
+                <td><?= $record->marital_questionnaire->dob ?></td>
+            </tr>
+            <tr>
+                <td>Relationship status</td>
+                <td><?= $record->marital_questionnaire->r_status ?></td>
+            </tr>
+            <tr>
+                <td>Occupation</td>
+                <td><?= $record->marital_questionnaire->occupation ?></td>
+            </tr>
+            <tr>
+                <td>Educational background</td>
+                <td><?= $record->marital_questionnaire->educational_background ?></td>
+            </tr>
+            <tr>
+                <td>Position in your family</td>
+                <td><?= $record->marital_questionnaire->position_in_family ?></td>
+            </tr>
+            <tr>
+                <td>Have you been married before?</td>
+                <td><?= $record->marital_questionnaire->married_before ?></td>
+            </tr>
+            <tr>
+                <td>Do you have any children?</td>
+                <td><?= $record->marital_questionnaire->have_children ?></td>
+            </tr>
+        </table>
+        <?php } ?>
+
+    </div>
+
+    <div class="modal-footer">
+        <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="popup">
+            <?= e(trans('backend::lang.form.close')) ?>
+        </button>
+    </div>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('ovalsoft/appointment/bookings') ?>" class="btn btn-default">Return to bookings list</a></p>
+
+<?php endif ?>

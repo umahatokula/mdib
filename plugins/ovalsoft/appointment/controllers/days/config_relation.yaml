@@ -1,0 +1,12 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+times:
+    label: Times
+    view:
+        list: $/ovalsoft/appointment/models/time/columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        form: $/ovalsoft/appointment/models/time/fields.yaml
+        recordsPerPage: 10

@@ -1,0 +1,113 @@
+<style>
+  input {
+    height: 70px;
+  }
+</style>
+
+<div class="container">
+  <div class="">
+    <div class="col-12">
+      <p style="border: solid 1px #3e0e10; padding: 20px;">
+        Fields marked <span class="text-danger">*</span> are required
+      </p>
+
+      <form 
+      data-request="onSubmit" 
+      data-request-validate 
+      data-request-flash
+      class="form-horizontal" id="regForm">
+
+      <fieldset class="mt-lg-4">
+        <h4 style="color: #DE1E25;">Appointment Information</h4>
+        
+        <input name="user_id" type="hidden" value="{{ user ? user.id : '' }}" >
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="name" class="col-form-label">Name <span class="text-danger">*</span></label>
+            <div class="form-group mt-3">
+              <input name="name" id="name" type="text" class="form-control b-box" value="{{ user ? user.name : '' }}" >
+              <small><span class="text-danger" data-validate-for="name"></span></small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="email" class="col-form-label">Email <span class="text-danger">*</span></label>
+            <div class="form-group mt-3">
+              <input name="email" id="email" type="email" class="form-control b-box"
+                value="{{ user ? user.email : '' }}" >
+              <small><span class="text-danger" data-validate-for="email"></span></small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="phone" class="col-form-label">Phone Number <span class="text-danger">*</span></label>
+            <div class="form-group mt-3">
+              <input name="phone" id="phone" type="text" class="form-control b-box" value="{{ user ? user.phone : '' }}" >
+              <small><span class="text-danger" data-validate-for="phone"></span></small>
+            </div>
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="start_date" class="col-form-label">Appointment Date <span class="text-danger">*</span></label>
+            <div class="form-group mt-3">
+              <input name="start_date" id="start_date" type="date" class="form-control b-box" value="" >
+              <small><span class="text-danger" data-validate-for="start_date"></span></small>
+            </div>
+          </div>
+        </div>
+          
+        <div class="row mb-3 mb-lg-5">
+          <div class="col-lg-12">
+            <label for="type_id" class=" col-form-label">Appointment Type <span class="text-danger">*</span></label>
+            <select name="type_id" id="type_id" class="form-control b-box" data-request="onAppointmentType">
+              <option value="">Select one</option>
+              {% for type in types %}
+              <option value="{{ type.id }}">{{ type.name }} [{{ type.amount|localizedcurrency('NGN') }}]</option>
+              {% endfor %}
+            </select>
+            <small><span class="text-danger" data-validate-for="type_id"></span></small>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-12" id="appointmentDaysAndTimes">
+            
+          </div>
+        </div>
+
+          <!-- <div class="row">
+            <div class="col-lg-12" id="appointmentDays">
+              <label for="day_id" class=" col-form-label">Appointment Days <span class="text-danger">*</span></label>
+              <select name="day_id" id="day_id" class="form-control b-box" data-request="onAppointmentTimes">
+                <option value="">Appointment Days</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-12" id="appointmentTimes">
+              <label for="time_id" class=" col-form-label">Appointment Times <span class="text-danger">*</span></label>
+              <select name="time_id" id="time_id" class="form-control b-box" data-request="onGetTotalAmount">
+                <option value="">Appointment Times</option>
+              </select>
+            </div>
+          </div> -->
+
+      </fieldset>
+
+
+      <button class="btn btn-block btn-outline btn-h7" type="submit"> Book Appointment
+      </button>
+
+      {{ form_close() }}
+
+    </div>
+  </div>
+</div>

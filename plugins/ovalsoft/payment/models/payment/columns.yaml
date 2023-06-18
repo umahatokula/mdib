@@ -1,0 +1,39 @@
+columns:
+    reference:
+        label: Ref
+        type: text
+        searchable: true
+        sortable: true
+    user_name:
+        label: Name
+        searchable: true
+        sortable: true
+    user_email:
+        label: Email
+        searchable: true
+        sortable: true
+    amount:
+        label: Amount
+        type: number
+        searchable: true
+        sortable: true
+    order_number:
+        label: Order Number
+        type: text
+        searchable: true
+        sortable: true
+    message:
+        label: Message
+        type: text
+        searchable: true
+        sortable: true
+    type:
+        label: Type
+        type: text
+        searchable: true
+        sortable: true
+    created_at:
+        label: 'Payment Date'
+        type: date
+        searchable: true
+        sortable: true

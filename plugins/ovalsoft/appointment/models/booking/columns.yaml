@@ -1,0 +1,13 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: Name
+    phone:
+        label: Phone
+    email:
+        label: Email
+    start_date:
+        label: Intended Start Date

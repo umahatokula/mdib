@@ -1,0 +1,115 @@
+{% if canRegister %}
+    <h3>Register</h3>
+    <p class="mb-4">Required ( <span class="text-danger">*</span> )</p>
+
+    {{ form_ajax('onRegisterUser') }}
+
+        <div class="form-group">
+            <label for="registerName">Full Name <span class="text-danger">*</span></label>
+            <input
+                name="name"
+                type="text"
+                class="form-control b-box"
+                id="registerName"
+                placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="registerEmail">Email <span class="text-danger">*</span></label>
+            <input
+                name="email"
+                type="email"
+                class="form-control b-box"
+                id="registerEmail"
+                placeholder="" />
+        </div>
+
+        {% if loginAttribute == "username" %}
+            <div class="form-group">
+                <label for="registerUsername">Username <span class="text-danger">*</span></label>
+                <input
+                    name="username"
+                    type="text"
+                    class="form-control b-box"
+                    id="registerUsername"
+                    placeholder="" />
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="registerPassword">Password <span class="text-danger">*</span></label>
+            <input
+                name="password"
+                type="password"
+                class="form-control b-box"
+                id="registerPassword"
+                placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="address1">Address Line 1 <span class="text-danger">*</span></label>
+            <input
+                name="address1"
+                type="text"
+                class="form-control b-box"
+                id="address1"
+                placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="address2">Address Line 2</label>
+            <input
+                name="address2"
+                type="text"
+                class="form-control b-box"
+                id="address2"
+                placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="street">Street <span class="text-danger">*</span></label>
+            <input
+                name="street"
+                type="text"
+                class="form-control b-box"
+                id="street"
+                placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="city">City <span class="text-danger">*</span></label>
+            <input
+                name="city"
+                type="text"
+                class="form-control b-box"
+                id="city"
+                placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="state">State <span class="text-danger">*</span></label>
+            <input
+                name="state"
+                type="text"
+                class="form-control b-box"
+                id="state"
+                placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label for="country">Country <span class="text-danger">*</span></label>
+            <input
+                name="country"
+                type="text"
+                class="form-control b-box"
+                id="country"
+                placeholder="" />
+        </div>
+        <input type="hidden" id="type" name="type" value="shipping">
+
+        <button type="submit" class="btn btn-default">Register</button>
+
+    {{ form_close() }}
+{% else %}
+    <!-- Registration is disabled. -->
+{% endif %}

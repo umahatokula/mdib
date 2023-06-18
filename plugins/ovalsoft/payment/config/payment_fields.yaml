@@ -1,0 +1,13 @@
+# ===================================
+#  Extended Profile Field Definitions
+# ===================================
+
+phone:
+    label: Reference
+    tab: Payments
+    span: left
+
+mobile:
+    label: Amount
+    tab: Payments
+    span: right

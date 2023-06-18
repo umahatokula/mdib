@@ -1,0 +1,15 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    start_time_of_day:
+        label: Start time
+        span: left        
+        type: datepicker
+        mode: time
+    end_time_of_day:
+        label: End time
+        span: right
+        type: datepicker
+        mode: time

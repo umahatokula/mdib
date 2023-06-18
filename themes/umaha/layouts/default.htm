@@ -1,0 +1,75 @@
+description = "Default layout"
+
+[session]
+security = "all"
+
+[Cart]
+==
+<html lang="en">
+
+<head>
+    <title>Marriage Dipped In Blood - {{ this.page.title }}</title>
+    <meta name="description" content="{{ this.page.meta_description }}">
+    <meta name="title" content="{{ this.page.meta_title }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Andrea - Creative Portfolio Template</title>
+    <meta name="description" content="Andrea - Creative Portfolio Template" />
+    <meta name="keywords"
+        content="blog, marraige, blood, covenant, relationships" />
+    <meta name="theme-color" content="#2a2d35">
+
+    <!-- Vendor Css-->
+    <link rel="stylesheet" href="{{ 'assets/css/bootstrap.css' | theme }}" />
+    <link rel="stylesheet" href="{{ 'assets/css/LineIcons.min.css' | theme }}" />
+    <link rel="stylesheet" href="{{ 'assets/css/swiper.css' | theme }}" />
+
+
+    <!-- Template style Css -->
+	<link href="{{ 'assets/css/style-dark.css' | theme }}" rel="stylesheet">
+
+    <!-- Custom style Css -->
+    <link href="{{ 'assets/css/custom.css' | theme }}" rel="stylesheet">
+
+    <!-- Fontawesome -->
+    <link href="{{ 'assets/font-awesome-4.7.0/css/font-awesome.css' | theme }}" rel="stylesheet">
+
+    <!-- Toastr -->
+    <link href="{{ 'assets/toastr/toastr.css' | theme }}" rel="stylesheet">
+
+    </style>   {% styles %}
+</head>
+
+<body data-spy="scroll" data-target=".navbar">
+
+    <div id="preloader" class="preloader">
+        <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    {% partial 'site/aside' %}
+
+    <div class="page-wrapper">
+
+         {% page %}
+
+
+         {% partial 'site/footer' %}
+    </div>
+
+
+
+    <script href="{{ 'assets/toastr/toastr.js' | theme }}" rel="stylesheet"></script>
+    <script src="{{ 'assets/js/vendor.js' | theme }}"></script>
+
+    <script src="{{ 'assets/js/custom.js' | theme }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    {% framework extras %}
+    {% scripts %}
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Day
+
+# Model Form Field configuration
+form: $/ovalsoft/appointment/models/day/fields.yaml
+
+# Model Class name
+modelClass: Ovalsoft\Appointment\Models\Day
+
+# Default redirect location
+defaultRedirect: ovalsoft/appointment/days
+
+# Create page
+create:
+    title: Create Day
+    redirect: ovalsoft/appointment/days/update/:id
+    redirectClose: ovalsoft/appointment/days
+
+# Update page
+update:
+    title: Edit Day
+    redirect: ovalsoft/appointment/days
+    redirectClose: ovalsoft/appointment/days
+
+# Preview page
+preview:
+    title: Preview Day

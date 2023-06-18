@@ -1,0 +1,211 @@
+title = "Checkout Success"
+url = "/checkout-success/:slug"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[OrderPage]
+slug = "{{ :slug }}"
+slug_required = 1
+
+[Cart]
+
+[UserAddress]
+
+[StatusList]
+==
+use Ovalsoft\Payment\Models\Payment;
+use Carbon\Carbon;
+
+function onPayment() {
+  // dd(post());
+
+  $payment = new Payment;
+  $payment->reference = post('reference');
+  $payment->user_name = post('name');
+  $payment->user_email = post('email');
+  $payment->amount = post('amount');
+  $payment->order_number = post('order_number');
+  $payment->message = post('message');
+  $payment->type = post('type');
+  $payment->created_at = Carbon::now();
+  $payment->save();
+
+  return redirect('/');
+}
+==
+{# Get order object #}
+{% set obOrder = OrderPage.get() %}
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>SHOP</span>
+      <h2>Payment</h2>
+    </div>
+
+    <div class="b-box p-4">
+      <div class="row mb-5">
+
+        <div class="col-md-6">
+          <h4 style="color: #a5090f;">Order Details: </h4>
+
+          <div class="row my-0">
+            <div class="col-4 p-3">
+              <b>Order Number:</b>
+            </div>
+            <div class="col-8 p-3"> {{ obOrder.order_number }}</div>
+          </div>
+
+          <div class="row my-0">
+            <div class="col-4 p-3">
+              <b>Price:</b>
+            </div>
+            <div class="col-8 p-3"> {{ obOrder.position_total_price }}</div>
+          </div>
+
+          <div class="row my-0">
+            <div class="col-4 p-3">
+              <b>Shipping Cost:</b>
+            </div>
+            <div class="col-8 p-3"> {{ obOrder.shipping_price }}</div>
+          </div>
+
+          <div class="row my-0">
+            <div class="col-4 p-3">
+              <b>Total Price:</b>
+            </div>
+            <div class="col-8 p-3"> {{ obOrder.total_price }}</div>
+          </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+          <h4 class="" style="color: #a5090f;">Summary: </h4>
+
+          <table class="table text-light table-bordered">
+            {% for obOrderPosition in obOrder.order_position %}
+            <tr>
+              <td>
+                <a class="product-card__link" href="{{ 'product-page'|page({ slug: obOrderPosition.offer.slug }) }}">
+                  <img
+                    src="{{ obOrderPosition.offer.preview_image.path }}"
+                    itemprop="image"
+                    alt="{{ obOrderPosition.offer.preview_image.description }}"
+                    title="{{ obOrderPosition.offer.preview_image.title }}"
+                    style="max-width: 70px"
+                  >
+                </a>
+              </td>
+              <td>
+                <a class="product-card__link" href="{{ 'product-page'|page({ slug: obOrderPosition.offer.slug }) }}">
+                  <h6>{{ obOrderPosition.offer.name }}</h6>
+                </a>
+                <span style="color: #777">Qty: {{ obOrderPosition.quantity }}</span>
+              </td>
+              <td>{{ obOrderPosition.quantity * obOrderPosition.price }} {{ obOrderPosition.currency_code }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+
+
+          <h4 class="mt-5" style="color: #a5090f;">Ship To: </h4>
+          {{ obOrder.property['shipping_address1'] }} <br>
+          {% if obOrder.property['shipping_address2'] is not empty %}{{ obOrder.property['shipping_address2'] }} {% endif %}<br>
+          {{ obOrder.property['shipping_street'] }} <br>
+          {{ obOrder.property['shipping_city'] }} <br>
+          {{ obOrder.property['shipping_state'] }} <br>
+          {{ obOrder.property['shipping_country'] }}
+
+          <h4 class="mt-5" style="color: #a5090f;">Shipping Method: </h4>
+          {{ obOrder.shipping_type.name }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          
+          <form>
+            
+
+          <input name="email" id="email" type="hidden" value="{{ obOrder.property['email'] }}">
+          <input name="amount" id="amount" type="hidden" value="{{ obOrder.total_price }}">
+          <input name="name" id="name" type="hidden" value="{{ obOrder.property['name']  }}">
+          <input name="order_number" id="order_number" type="hidden" value="{{ obOrder.order_number }}">
+          <div id="paystack-injects"></div>
+
+
+          <script src="https://js.paystack.co/v1/inline.js"></script>
+
+          <button  onclick="payWithPaystack()" class="btn btn-block" type="button"> Click To Pay </button>
+
+          </form>
+          <br>
+
+          <img src="{{ 'assets/images/we_accept.png' | theme }}" class="img-fluid" style="max-width: 300px" />
+
+        </div>
+      </div>
+  	</div>
+    
+  </div>
+</section>
+
+
+<script>
+
+  function payWithPaystack(){
+  var email       = $('#email').val();
+  var amount      = $('#amount').val();
+  var name      = $('#name').val();
+  var order_number      = $('#order_number').val();
+  console.log(email, amount, name, order_number)
+
+  if (email.length == 'undefined' || email.length == 0) { 
+   alert("Please enter your email");    
+   return false;
+  } 
+
+  if (amount == undefined) { 
+   alert("Please ensure you have selected an Appointment Type");    
+   return false;
+  } 
+
+  if ( amount.length == 0) { 
+   alert("Please ensure you have selected an Appointment Type");    
+   return false;
+  } 
+
+  var handler = PaystackPop.setup({
+    key     : 'pk_live_16d8d68bea07430c7a0d95e7501de6dcdef5ef7d',
+    email   : email,
+    amount  : amount * 100,
+    name    : name,
+    currency: "NGN",
+    metadata: {
+       custom_fields: [
+          {
+              name        : name,
+              order_number: order_number,
+              amount      : amount
+          }
+       ]
+    },
+    callback: function(response){
+      console.log(response)
+
+      $("#paystack-injects").append(`<input type="hidden" name='reference' value='${response.reference}' />`);
+
+      $("#paystack-injects").append(`<input type="hidden" name='payment_trxref' value='${response.transaction}' />`);
+
+      $('form').request('onPayment', {data: {email: email, amount: amount, name: name, order_number: order_number, reference: response.reference , transaction: response.transaction, status: response.status, message: response.message, type: 'shop' }})
+    },
+    onClose: function(){
+        alert('The transaction was cancelled.');
+    }
+  });
+  handler.openIframe();
+  }
+</script>

@@ -1,0 +1,45 @@
+title = "Product List"
+url = "/products-list"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[ProductPage]
+slug = "{{ :slug }}"
+slug_required = 1
+smart_url_check = 1
+skip_error = 0
+
+[Cart]
+==
+use Lovata\Shopaholic\Components\ProductList;
+use Lovata\Shopaholic\Classes\Collection\ProductCollection;
+function onStart()
+{
+    $obList = ProductCollection::make();
+    dd($obList);
+}
+==
+{# Get product item #}
+{% set obProduct = ProductPage.get() %}
+{# Get first offer object #}
+{% set obOffer = obProduct.offer.first() %}
+
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>SHOP</span>
+      <h2>Product</h2>{% component 'Cart' %}
+    </div>
+
+    <div class="b-box p-4">
+        <div class="row mb-3">
+            <div class="col-lg-12">
+            </div>
+        </div>
+        <div class="wysiwyg">{{ obProduct.description|raw }}</div>
+  	</div>
+    
+  </div>
+</section>

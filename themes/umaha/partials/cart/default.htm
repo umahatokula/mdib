@@ -1,0 +1,13 @@
+{# Get cart positions #}
+
+<div class="mini-cart-wrapper">
+    {% set obCartPositionList = Cart.get() %}
+    {% if obCartPositionList.isNotEmpty() %}
+
+        <a href="{{ 'cart' | page }}" class="" style="color: #a5090f;">Go To Cart</a>  &nbsp Item(s): {{obCartPositionList.getTotalQuantity()}}
+
+        &nbsp <div> Total Cost: &nbsp {{ obCartPositionList.getTotalPrice() }} {{ obCartPositionList.getCurrency() }} </div>
+    {% else %}
+        <div>Cart is empty</div>
+    {% endif %}
+</div>

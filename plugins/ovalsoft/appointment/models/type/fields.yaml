@@ -1,0 +1,17 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Type Name
+        span: left
+    slug:
+        label: Slug
+        preset: name
+        span: right
+    amount:
+        label: Amount
+        type: number
+        min: 0
+        span: auto

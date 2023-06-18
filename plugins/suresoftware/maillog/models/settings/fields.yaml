@@ -1,0 +1,7 @@
+fields:
+    purge:
+        label: 'Keep logs for x Days'
+        comment: 'Number of days before the logs will be purged'
+        span: auto
+        default: 30
+        type: number

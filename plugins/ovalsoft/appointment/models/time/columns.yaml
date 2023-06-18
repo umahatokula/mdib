@@ -1,0 +1,13 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    start_time_of_day:
+        label: Start time
+        type: time
+        ignoreTimezone: true
+    end_time_of_day:
+        label: End time
+        type: time
+        ignoreTimezone: true

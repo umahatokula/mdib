@@ -1,0 +1,12 @@
+title = "Order"
+url = "/order/:slug"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[OrderPage]
+slug = "{{ :slug }}"
+slug_required = 1
+==
+{% component 'OrderPage' %}

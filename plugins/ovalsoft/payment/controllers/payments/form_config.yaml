@@ -1,0 +1,21 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+name: Payments
+form: $/ovalsoft/payment/models/payment/fields.yaml
+modelClass: Ovalsoft\Payment\Models\Payment
+
+create:
+    title: New Payment
+    redirect: ovalsoft/payment/update/:id
+    redirectClose: ovalsoft/payment/payments
+    flashSave: Payment was successful!
+
+update:
+    title: Edit Payment
+    redirect: ovalsoft/payment/update/:id
+    flashSave: Payment updated successfully!
+
+preview:
+    title: View Payment

@@ -1,0 +1,98 @@
+subject = "You have successfully registered for {{ event.name }}" 
+layout = "simple"
+== 
+
+==
+
+{% if event.flyer.path %}
+<img src="{{ message.embed(event.flyer.path) }}" alt="" class="img-fluid"> {% endif %}
+<p>Dear {{ user.name }},</p>
+
+<p>Congratulations on completing your registration for
+	<strong>{{ event.name }}</strong>.</p>
+
+<p>Your registration number is
+	<strong>{{ "%05d"|format(user.event_registration_number) }}</strong>
+</p>
+
+<p>We look forward to recieving you and we know your life will NEVER remain the same.</p>
+
+<p>Find details of your registration below</p>
+
+<table class="table table-striped table-condensed">
+	<tr>
+		<td>Name:</td>
+		<td>{{ user.name }}</td>
+	</tr>
+	<tr>
+		<td>Phone:</td>
+		<td>{{ user.phone }}</td>
+	</tr>
+	<tr>
+		<td>Email:</td>
+		<td>{{ user.email }}</td>
+	</tr>
+	<tr>
+		<td>Accomodation:</td>
+		<td>
+			{% if user.accommodation == 1 %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td>Feeding:</td>
+		<td>
+				{% if user.feeding == 1 %}
+				Yes
+				{% else %}
+				No
+				{% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td>Transportation:</td>
+		<td>
+			{% if user.transportation == 1 %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td>Coming with a car:</td>
+		<td>
+			{% if user.coming_with_car == 1 %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td>Willing to assist with car:</td>
+		<td>
+			{% if user.assist_with_car == 1 %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td>Arrival Date:</td>
+		<td>{{ user.arrival_date }}</td>
+	</tr>
+	<tr>
+		<td>Departure Date:</td>
+		<td>{{ user.departure_date }}</td>
+	</tr>
+</table>
+
+<p>This email will serve as your registration slip for this event.</p>
+
+<p>Warm Regards,
+	<br> Christ Family Ministry</p>

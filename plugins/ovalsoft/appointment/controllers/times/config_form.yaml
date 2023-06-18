@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Time
+
+# Model Form Field configuration
+form: $/ovalsoft/appointment/models/time/fields.yaml
+
+# Model Class name
+modelClass: Ovalsoft\Appointment\Models\Time
+
+# Default redirect location
+defaultRedirect: ovalsoft/appointment/times
+
+# Create page
+create:
+    title: Create Time
+    redirect: ovalsoft/appointment/times/update/:id
+    redirectClose: ovalsoft/appointment/times
+
+# Update page
+update:
+    title: Edit Time
+    redirect: ovalsoft/appointment/times
+    redirectClose: ovalsoft/appointment/times
+
+# Preview page
+preview:
+    title: Preview Time

@@ -1,0 +1,56 @@
+title = "Cart"
+url = "/cart"
+layout = "default"
+is_hidden = 0
+
+[Cart]
+
+[ShippingTypeList]
+
+[PaymentMethodList]
+==
+<?php
+function onStart () {
+    $loggedIn = Auth::check();
+
+    if(!$loggedIn) {
+        return redirect('login');    
+    }
+
+    $this['user'] = Auth::getUser();
+    // dd($this['user'] );
+    
+    $this->addJs('assets/js/orders/make-order.js');
+    $this->addJs('assets/js/clear-cart/clear-cart.js');
+    $this->addJs('assets/js/cart/remove-cart.js');
+}
+?>
+==
+{% set obCartPositionList = Cart.get() %}
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>SHOP</span>
+      <h2>Cart</h2>{% component 'Cart' obCartPositionList = obCartPositionList %}
+    </div>
+
+    <div class="b-box p-4">
+        <div class="cart-table">
+
+          <h4 class="mt-5 mb-2" style="color: #a5090f;">Cart Items</h4>
+
+          {% if obCartPositionList.getTotalQuantity() > 0 %}
+            {% partial 'cart/checkout/checkout' %}
+
+            <div class="d-flex bd-highlight mb-3">
+                <div class="mr-auto bd-highlight btn-clear-cart"><button class="btn btn-lg">Clear Cart</button></div>
+                <div class="bd-highlight"><a href="{{ 'checkout' | page }}" class="btn btn-lg">Checkout</a></div>
+            </div>
+          {% else %}
+          <p>Cart is empty</p>
+          {% endif %}
+        </div>
+  	</div>
+    
+  </div>
+</section>

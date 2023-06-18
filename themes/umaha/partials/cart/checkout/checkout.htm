@@ -1,0 +1,66 @@
+{# Get active shipping type and payment method #}
+{% set obShippingTypeList = ShippingTypeList.make().active().sort() %}
+{% set obActiveShippingType = obShippingTypeList.first() %}
+
+{% set obPaymentMethodList = PaymentMethodList.make().active().sort() %}
+{% set obActivePaymentMethod = obPaymentMethodList.first() %}
+
+{# Get cart positions #}
+{% set obCartPositionList = Cart.get(obActiveShippingType, obActivePaymentMethod) %}
+{% if obCartPositionList.isNotEmpty() %}
+
+    <table class="table table-bordered text-light table-responsive-md table-sm" id="cartTable">
+        <thead>
+            <tr>
+                <th class="text-center">Product</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Qty</th>
+                <th class="text-right">Price (NGN)</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obCartPosition in obCartPositionList %}
+            {% set obOffer = obCartPosition.item %}
+            {% set obProduct = obOffer.product %}
+            <tr id="offer-row-{{ obProduct.id }}">
+                <td class="text-center" style="vertical-align: middle;">
+                {% if obProduct.preview_image is not empty %}
+                    <a href="{{ 'product-page'|page({ slug: obProduct.slug }) }}">
+                    <img
+                        src="{{ obProduct.preview_image.path }}"
+                        itemprop="image"
+                        alt="{{ obProduct.preview_image.description }}"
+                        title="{{ obProduct.preview_image.title }}"
+                        style="max-width: 100px"
+                    >
+                    </a>
+                {% endif %}
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                    <a href="{{ 'product-page'|page({ slug: obProduct.slug }) }}" style="color: white;">{{ obProduct.name }}</a>
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                    <input type="number" name="quantity" valcsue="{{ obCartPosition.quantity }}" max="{{ obOffer.quantity }}" min="1" class="text-center" style="width: 80px ">
+                    {{ obCartPosition.quantity }}
+                </td>
+                <td class="text-right" style="vertical-align: middle;">
+                    <span data-price="{{ obCartPosition.price_value }}">{{ obCartPosition.price }}</span>
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                    <a class="text-danger remove-cart-item" id="{{ obProduct.id }}" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="text-center" colspan="4">Total price: </td>
+                <td class="text-right">{{ obCartPositionList.getTotalPrice() }} {{ obCartPositionList.getCurrency() }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+{% else %}
+    <div>Cart is empty</div>
+{% endif %}

@@ -1,0 +1,141 @@
+
+<style>
+  input {
+    height: 70px;
+  }
+</style>
+
+<div class="container">
+  <div class="">
+    <div class="col-12">
+      <p style="border: solid 1px #3e0e10; padding: 20px;">
+          Fields marked <span class="text-danger">*</span> are required
+      </p>
+
+      <form class="form-horizontal mb-4" id="regForm">
+
+
+
+      <fieldset class="mt-lg-4">
+        <h4 style="color: #DE1E25;">Payment Information</h4>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="code" class="col-form-label">Appointment Code <span class="text-danger">*</span></label>
+            <div class="form-group mt-3">
+              <input name="code" id="code" type="text" class="form-control b-box" value="{{ code }}" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="email" class="col-form-label">Email <span class="text-danger">*</span></label>
+            <div class="form-group mt-3">
+              <input name="email" id="email" type="email" class="form-control b-box" value="{{ user ? user.email : '' }}" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="name" class="col-form-label">Name <span class="text-danger">*</span></label>
+            <div class="form-group mt-3">
+              <input name="name" id="name" type="text" class="form-control b-box" value="{{ user ? user.name : '' }}" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+            <label for="type_id" class=" col-form-label">Appointment Type <span class="text-danger">*</span></label>
+              <select 
+              name="type_id" 
+              id="type_id" 
+              class="form-control b-box" 
+              data-request="onGetMembershipAmount" 
+              >
+                  <option value="">Select one</option>
+                {% for type in types %}
+                  <option value="{{ type.id }}">{{ type.name }} [{{ type.amount|localizedcurrency('NGN') }}]</option>
+                {% endfor %}
+              </select>
+            </div>
+        </div>
+
+      </fieldset>
+
+      <div class="mt-3" style="margin-bottom: 20px; display: flex; justify-content: center;">
+          <div id="membershipAmount" style="width: 100%;">
+          </div>
+      </div>
+
+
+      <div id="paystack-injects"></div>
+
+
+      <script src="https://js.paystack.co/v1/inline.js"></script>
+
+      <button  onclick="payWithPaystack()" class="btn btn-block btn-primary btn-outline btn-h7" type="button"> Click To Pay </button>
+
+      {{ form_close() }}
+
+      <img src="{{ 'assets/images/we_accept.png' | theme }}" class="img-fluid" style="max-width: 300px" />
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function payWithPaystack(){
+  var email       = $('#email').val();
+  var name       = $('#name').val();
+  var amount      = $('#amount').val();
+  var type_id      = $('#type_id').val();
+
+  if (email.length == 'undefined' || email.length == 0) { 
+   alert("Please enter your email");    
+   return false;
+  } 
+
+  if (amount == undefined) { 
+   alert("Please ensure you have selected an Appointment Type");    
+   return false;
+  } 
+
+  if ( amount.length == 0) { 
+   alert("Please ensure you have selected an Appointment Type");    
+   return false;
+  } 
+
+  var handler = PaystackPop.setup({
+    key: '{{ payment_settings.paystack_pk_key }}',
+    email: email,
+    amount: amount * 100,
+    name: name,
+    currency: "NGN",
+    metadata: {
+       custom_fields: [
+          {
+              display_name: "Mobile Number",
+              variable_name: "mobile_number",
+              value: "+2348012345678"
+          }
+       ]
+    },
+    callback: function(response){
+
+        $("#paystack-injects").append(`<input type="hidden" name='reference' value='${response.reference}' />`);
+
+        $("#paystack-injects").append(`<input type="hidden" name='payment_trxref' value='${response.transaction}' />`);
+
+        $('form').request('onPayment', {data: {email: email, amount: amount, name: name, reference: response.reference , transaction: response.transaction, status: response.status, message: response.message, type: 'appointment' }})
+    },
+    onClose: function(){
+        alert('The transaction was cancelled.');
+    }
+  });
+  handler.openIframe();
+  }
+</script>

@@ -1,0 +1,21 @@
+plugin:
+    name: 'ovalsoft.payment::lang.plugin.name'
+    description: 'ovalsoft.payment::lang.plugin.description'
+    author: Ovalsoft
+    icon: oc-icon-dollar
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Payments
+        url: ovalsoft/payment/payments
+        icon: icon-money
+        permissions:
+            - add_payment
+            - view-payments
+permissions:
+    add_payment:
+        tab: Payment
+        label: 'Add Payment'
+    view-payments:
+        tab: Payment
+        label: 'View Payments'

@@ -1,0 +1,8 @@
+1.0.1: 
+    - First version of Appointments
+    - create_days_table.php
+    - create_times_table.php
+    - create_day_time_table.php
+    - create_types_table.php
+    - create_bookings_table.php
+    - create_counselling_questionnaires_table.php

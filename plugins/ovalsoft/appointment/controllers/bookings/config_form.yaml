@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Booking
+
+# Model Form Field configuration
+form: $/ovalsoft/appointment/models/booking/fields.yaml
+
+# Model Class name
+modelClass: Ovalsoft\Appointment\Models\Booking
+
+# Default redirect location
+defaultRedirect: ovalsoft/appointment/bookings
+
+# Create page
+create:
+    title: Create Booking
+    redirect: ovalsoft/appointment/bookings/update/:id
+    redirectClose: ovalsoft/appointment/bookings
+
+# Update page
+update:
+    title: Edit Booking
+    redirect: ovalsoft/appointment/bookings
+    redirectClose: ovalsoft/appointment/bookings
+
+# Preview page
+preview:
+    title: Preview Booking

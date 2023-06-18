@@ -1,0 +1,84 @@
+title = "Marriage Counselling"
+url = "/marriage-counselling"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use Ovalsoft\Appointment\Models\Day;
+
+function onEnd()
+{
+    $bookings = Day::with('times')->get();
+	$this->page->bookings = $bookings->groupBy('type_id');
+	// dd($this->page->bookings);
+}
+?>
+==
+{% set bookings = this.page.bookings %}
+<section class="section section-light">
+  <div class="container">
+    <div class="section-head text-center">
+      <span>Services</span>
+      <h2>Marriage Counselling</h2>
+    </div>
+  
+  	<div class="b-box p-4">
+  	
+    	<h5 class="mb-0">Would you like to save or improve your marriage?</h5>
+    	<p class=" mt-3" style="color: #FFF">
+    	Get professional Christian Counselling from a trusted counsellor</p>
+    	<p style="color: #FFF" class=" mb-3 mb-lg-5">
+    	Our services are flexible and convenient, you can have a session with a trusted
+    	counsellor in a location that suits you.
+    	This could be in the comfort of your home, in another country or on the go.
+    	We’d like you to receive the support you need in a way that’s comfortable for you.
+    	So whether you want to email or chat through Facebook messenger or get a call on
+    	your mobile phone, we’ve got you covered.
+    	We’d love to hear from you.
+    	Click here to get help</p>
+    
+    	<h5 class="mb-0">To schedule an appointment</h5>
+    	<p class=" mt-3" style="color: #FFF">Call 
+    	<a href="tel:9876543210" class="text-underline">(+225)54793640</a> or <br> email ​
+    	<a href="mailto:doofan@marriagedippedinblood.com" class="text-underline">doofan@marriagedippedinblood.com</a>
+    	<br> Appointments are scheduled as follows. You will be offered the first available appointment that matches your schedule. We aim to offer appointments as soon as possible.</p>
+    	<br>
+    	<table class="table text-white" style="color: #FFF">
+    		<thead>
+    			<tr>
+    				<td>Day of Week</td>
+    				<td>Times</td>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			{% for booking in bookings[1] %}
+    			<tr>
+    				<td>{{ booking.day_of_week }}</td>
+    				<td>{% for time in booking.times %} {{ time.start_time_of_day | date('H i a') }} - {{ time.end_time_of_day | date('H i a') }} <br> {% endfor %}</td>
+    			</tr>
+    			{% endfor %}
+    		</tbody>
+    	</table>
+  	</div>
+    
+  </div>
+</section>
+
+<!-- START: CTA -->
+<section class="section pt-0 section-freelance section-light text-center ">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-head wow-none fadeInUp" data-wow-none-duration="1.5s">
+					<h2>Let's work together!</h2>
+				</div>
+				<div class="mt-5 wow-none fadeInUp" data-wow-none-duration="1.5s" data-wow-none-delay=".2s">
+					<a href="{{ 'book-appointment' | page }}" class="btn ">Book An Appointment!</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END: CTA -->

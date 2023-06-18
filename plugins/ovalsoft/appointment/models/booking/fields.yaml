@@ -1,0 +1,21 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Name
+        span: auto
+    type_id:
+        label: Appointment Type
+        type: dropdown
+        span: auto
+    phone:
+        label: Phone
+        span: auto
+    email:
+        label: Email
+        span: auto
+    start_date:
+        label: Intended Start Date
+        span: auto

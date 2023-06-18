@@ -1,0 +1,191 @@
+title = "Services"
+url = "/services"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use Ovalsoft\Appointment\Models\Day;
+
+function onEnd()
+{
+    $bookings = Day::with('times')->get();
+	$this->page->bookings = $bookings->groupBy('type_id');
+	// dd($this->page->bookings);
+}
+?>
+==
+{% set bookings = this.page.bookings %}
+
+<style>
+ul.circle {
+  list-style-type: circle;
+  padding-left: 50px;
+}
+</style>
+
+
+<!-- START: SERVICES -->
+<section class="section section-light section-services" id="services" style="padding: 0">
+	<div class="container">
+		<div class="section-head text-center">
+			<span>WHAT I DO</span>
+			<h2>My Services</h2>
+		</div>
+		<div class="row justify-content-center">
+			
+			<div class="col-md-12 mb-5">
+				<h1 class="mb-0">Would you like to save or improve your marriage?</h1>
+				<p class=" mt-3" style="color: #FFF">
+				Get professional Christian Counselling from a trusted counsellor</p>
+				<p style="color: #FFF" class=" mb-3 mb-lg-5">
+				Our services are flexible and convenient, you can have a session with a trusted
+				counsellor in a location that suits you.
+				This could be in the comfort of your home, in another country or on the go.
+				We’d like you to receive the support you need in a way that’s comfortable for you.
+				So whether you want to email or chat through Facebook messenger or get a call on
+				your mobile phone, we’ve got you covered.
+				We’d love to hear from you.
+				Click here to get help</p>
+				<h4 class="mb-0">To schedule an appointment</h4>
+				<p class=" mt-3" style="color: #FFF">Call 
+				<a href="tel:9876543210" class="text-underline">(+225)54793640</a> or email ​ <a href="mailto:doofan@marriagedippedinblood.com" class="text-underline">doofan@marriagedippedinblood.com</a>
+				<br> Appointments are scheduled as follows. You will be offered the first available appointment that matches your schedule. We aim to offer appointments as soon as possible.</p>
+			</div>
+
+			<div class="col-12 mb-lg-5">
+				<div class="divider"><span></span><span>Marriage Counselling</span><span></span></div>
+			</div>
+
+			<div class="col-md-5 align-items-start">
+				<div class="services-list b-box  p-4 wow-none fadeInUp" data-wow-none-duration="1.5s">
+					<img alt="services" src="{{ 'assets/images/marriage-couselling.jpg' | theme }}">
+					<div class="services-list-icon">
+						<span>Couples</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="about-desc wow-none fadeInUp" data-wow-none-duration="1s"  data-wow-none-delay="500ms">
+					<div class="about-desc-content">
+						<p class="mb-0" style="color: #FFF">Would you like to save or improve your marriage?</p>
+						<p class=" mt-3" style="color: #FFF">
+						Get professional Christian Counselling from a trusted counsellor</p>
+						<p style="color: #FFF" class=" mb-3 mb-lg-5">
+						Our services are flexible and convenient, you can have a session with a trusted
+						counsellor in a location that suits you.
+						This could be in the comfort of your home, in another country or on the go.
+						We’d like you to receive the support you need in a way that’s comfortable for you.
+						So whether you want to email or chat through Facebook messenger or get a call on
+						your mobile phone, we’ve got you covered.
+						We’d love to hear from you.
+						Click here to get help</p>
+						<table class="table text-light table-bordered" style="color: #FFF">
+							<thead>
+								<tr>
+									<td>Day of Week</td>
+									<td>Times</td>
+								</tr>
+							</thead>
+							<tbody>
+								{% for booking in bookings[1] %}
+								<tr>
+									<td>{{ booking.day_of_week }}</td>
+									<td>{% for time in booking.times %} {{ time.start_time_of_day | date('H i a') }} - {{ time.end_time_of_day | date('H i a') }} <br> {% endfor %}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-12 mb-lg-5">
+				<div class="divider"><span></span><span>Pre-marriage School</span><span></span></div>
+			</div>
+
+			<div class="col-md-5 align-items-start">
+				<div class="services-list b-box  p-4 wow-none fadeInUp" data-wow-none-duration="1.5s">
+					<img alt="services" src="{{ 'assets/images/premarriageschool.jpg' | theme }}">
+					<div class="services-list-icon">
+						<span>Singles</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="about-desc wow-none fadeInUp" data-wow-none-duration="1s"  data-wow-none-delay="500ms">
+					<div class="about-desc-content">
+						
+						<p style="color: #FFF;">Marriage preparation is not only important but absolutely necessary to get you started your marriage covenant adventure on a good foundation.</p>
+						
+						<p style="color: #FFF;">Research shows that couples who receive premarital Counselling have a 30% lower chance at divorce than couples who do not. (Scott Stanley, The Marriage Project.) </p>
+						
+						<p style="color: #FFF;">That’s why Marriage Prep School is a great place to get you started.</p>
+						
+						<p style="color: #FFF;">Marriage Prep School 
+						is a 4-week Premarital Counselling Program.</p>
+						
+						<p style="color: #FFF;">You could choose to take the courses online or in person, depending on your location.</p>
+						
+						<p style="color: #FFF;"> What you’ll learn in 4 weeks</p>
+						<ul  class="circle" style="color: #FFF;">
+							<li>Your identity </li>
+							<li>How it affects your choice of a life partner </li>
+							<li>The role of your faith and spirituality in choosing a life partner</li>
+							<li>How to know whether or not you’re ready for marriage </li>
+							<li>How to know "The One"</li>
+							<li>How to become Mr/Mrs Right</li>
+							<li>Communication skills</li>
+							<li>Conflict management /resolution</li>
+							<li>How to become financially intelligent </li>
+							<li>A ton of questions to ask a potential spouse </li>
+							<li>And more</li>
+						</ul>
+						
+						<p style="color: #FFF;">A certificate of participation will be presented to every active participant at the end of the program.</p>
+						<br>
+						<table class="table text-light table-bordered" style="color: #FFF">
+							<thead>
+								<tr>
+									<td>Day of Week</td>
+									<td>Times</td>
+								</tr>
+							</thead>
+							<tbody>
+								{% for booking in bookings[2] %}
+								<tr>
+									<td>{{ booking.day_of_week }}</td>
+									<td>{% for time in booking.times %} {{ time.start_time_of_day | date('H i a') }} - {{ time.end_time_of_day | date('H i a') }} <br> {% endfor %}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</section>
+<!-- END: SERVICES -->
+
+<!-- START: CTA -->
+<section class="section pt-0 section-freelance section-light text-center pt-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-head wow-none fadeInUp" data-wow-none-duration="1.5s">
+					<h2>Let's work together!</h2>
+				</div>
+				<div class="mt-5 wow-none fadeInUp" data-wow-none-duration="1.5s" data-wow-none-delay=".2s">
+					<a href="{{ 'book-appointment' | page }}" class="btn ">Book An Appointment!</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END: CTA -->
